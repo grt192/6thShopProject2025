@@ -7,43 +7,89 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 public class TankSubsystem extends SubsystemBase {
+
+  // declaring each motor
+  private final WPI_TalonSRX leftFRONT;
+  private final WPI_TalonSRX leftBACK;
+  private final WPI_TalonSRX rightFRONT;
+  private final WPI_TalonSRX rightBACK;
+
+  // creating var to hold speed value for each side
+  private double leftSpeed;
+  private double rightSpeed;
+
+  // creating var to break system
+  private boolean motorBreak;
+
   /** Creates a new ExampleSubsystem. */
   public TankSubsystem() {
+
+    // left motor pre-settings
+
+    // setting Motor ID's
+    leftFRONT = new WPI_TalonSRX(3);
+    leftBACK = new WPI_TalonSRX(2);
+
+    leftBACK.follow(leftFRONT); // mimic front to back motor
+
+    // set to Neutral so it is ready to move
+    leftFRONT.setNeutralMode(NeutralMode.Coast);
+    leftBACK.setNeutralMode(NeutralMode.Coast);
+
+    // right motor pre-settings
+
+    // setting Motor ID's
+    rightFRONT = new WPI_TalonSRX(14);
+    rightBACK = new WPI_TalonSRX(15);
+
+    rightBACK.follow(rightFRONT); // mimic front to back motor
+
+    // set to Neutral so it is ready to move
+    rightFRONT.setNeutralMode(NeutralMode.Coast);
+    rightBACK.setNeutralMode(NeutralMode.Coast);
+
   }
 
   /**
-   * Example command factory method.
+   * Sets the leftMotors and rightMotors speed and direction.
    *
-   * @return a command
+   * @param leftSpeed  The raw motor speed to set the rollers to (typically
+   *                   between -1.0 and 1.0).
+   * @param rightSpeed The raw motor speed to set the rollers to (typically
+   *                   between -1.0 and 1.0).
    */
-  public Command exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
+  public void setMotors(double leftSpeed, double rightSpeed) {
+
+    // left Motor speed set
+    leftFRONT.set(-1 * leftSpeed);
+
+    // right Motor speed set
+    System.out.println(rightSpeed);
+    rightFRONT.set(rightSpeed);
+
   }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a
-   * digital sensor).
+   * Sets the leftMotors and rightMotors brakes.
    *
-   * @return value of some boolean subsystem state, such as a digital sensor.
+   * @param motorBreak boolean for if break
    */
-  public boolean exampleCondition() {
-    // Query some boolean state, such as a digital sensor.
-    return false;
+  public void breakMotors(boolean motorBreak) {
+
+    // left Motor speed set
+    leftFRONT.setNeutralMode(NeutralMode.Brake);
+    leftBACK.setNeutralMode(NeutralMode.Brake);
+
+    // right Motor speed set
+    rightFRONT.setNeutralMode(NeutralMode.Brake);
+    rightBACK.setNeutralMode(NeutralMode.Brake);
+
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
 }
