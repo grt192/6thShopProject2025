@@ -4,11 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
@@ -20,7 +18,7 @@ public class RobotContainer {
   private final TankSubsystem tankSubsystem;
 
   // Controls defined
-  private final XboxController mechController;
+  private final CommandPS4Controller mechController;
   public double joyConLeft;
   public double joyConRight;
 
@@ -30,7 +28,7 @@ public class RobotContainer {
     tankSubsystem = new TankSubsystem();
 
     // Configure Bindings
-    mechController = new XboxController(0);
+    mechController = new CommandPS4Controller(0); // Use PS4 controller
     joyConLeft = 0;
     joyConRight = 0;
 
@@ -45,16 +43,14 @@ public class RobotContainer {
    * predicate, or via the named factories in {@link
    * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
    * {@link
-   * CommandXboxController
-   * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or
-   * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+   * CommandPS4Controller
+   * PS4}/{@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
   private void configureBindings() {
     tankSubsystem.setDefaultCommand(new RunCommand(() -> {
-      this.joyConLeft = mechController.getLeftY();
-      this.joyConRight = mechController.getRightY();
+      this.joyConLeft = mechController.getLeftY(); // Left Y-axis for PS5 controller
+      this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
       tankSubsystem.setMotors(joyConLeft, joyConRight);
     }, tankSubsystem));
   }
