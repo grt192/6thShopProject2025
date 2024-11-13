@@ -14,7 +14,7 @@ public class RollerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public RollerSubsystem() {
     speed = 0;
-    rollerMotor = new CANSparkMax();
+    //rollerMotor = new CANSparkMax(0, null);
   }
 
   /**
