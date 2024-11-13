@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.RollerSubsystem;
 import frc.robot.subsystems.TankSubsystem;
 
 public class RobotContainer {
@@ -19,6 +20,7 @@ public class RobotContainer {
 
   // Controls defined
   private final CommandPS4Controller mechController;
+  private final RollerSubsystem rollerSubsystem;
   public double joyConLeft;
   public double joyConRight;
 
@@ -31,7 +33,7 @@ public class RobotContainer {
     mechController = new CommandPS4Controller(0); // Use PS4 controller
     joyConLeft = 0;
     joyConRight = 0;
-
+    
     configureBindings();
   }
 
@@ -51,8 +53,11 @@ public class RobotContainer {
     tankSubsystem.setDefaultCommand(new RunCommand(() -> {
       this.joyConLeft = mechController.getLeftY(); // Left Y-axis for PS5 controller
       this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
+
       tankSubsystem.setMotors(joyConLeft, joyConRight);
     }, tankSubsystem));
+    r
+    
   }
 
   // /**
