@@ -5,11 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RollerCommands;
 import frc.robot.subsystems.RollerSubsystem;
 import frc.robot.subsystems.TankSubsystem;
 
@@ -21,6 +24,7 @@ public class RobotContainer {
   // Controls defined
   private final CommandPS4Controller mechController;
   private final RollerSubsystem rollerSubsystem;
+  private final RollerCommands rollerCommand;
   public double joyConLeft;
   public double joyConRight;
 
@@ -28,12 +32,11 @@ public class RobotContainer {
 
     // Subsystem created
     tankSubsystem = new TankSubsystem();
-
+    rollerSubsystem = new RollerSubsystem();
     // Configure Bindings
     mechController = new CommandPS4Controller(0); // Use PS4 controller
     joyConLeft = 0;
     joyConRight = 0;
-    
     configureBindings();
   }
 
@@ -56,7 +59,11 @@ public class RobotContainer {
 
       tankSubsystem.setMotors(joyConLeft, joyConRight);
     }, tankSubsystem));
-    r
+    
+    //if pressed circle, run rollers
+    mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(0.5), rollerSubsystem));
+    //if not pressed circle, run rollers
+    mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
     
   }
 

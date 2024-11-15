@@ -4,17 +4,19 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants.RollerConstants;
+import com.ctre.phoenix6.signals.MotorTypeValue;
 import com.revrobotics.CANSparkMax;
-
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RollerSubsystem extends SubsystemBase {
-  double speed;
+  static double speed;
   private final CANSparkMax rollerMotor;
   /** Creates a new ExampleSubsystem. */
   public RollerSubsystem() {
     speed = 0;
-    //rollerMotor = new CANSparkMax(0, null);
+    rollerMotor = new CANSparkMax(RollerConstants.ROLLER_MOTOR_ID, MotorType.kBrushless);
   }
 
   /**
@@ -23,7 +25,8 @@ public class RollerSubsystem extends SubsystemBase {
    * @return a command
    */
 
-  public void setSpeed(double newSpeed){
+  //sets the speed of the rollers
+  public static void setSpeed(double newSpeed){
     speed = newSpeed;
   }
   /**
@@ -33,10 +36,11 @@ public class RollerSubsystem extends SubsystemBase {
    * @return value of some boolean subsystem state, such as a digital sensor.
    */
 
+   //sets the actuall speed of the rollers
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    set.motor(speed)//set motor power
+    rollerMotor.set(speed);
   }
 
 }
