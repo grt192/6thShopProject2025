@@ -16,4 +16,8 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static class  RollerConstants {
+    public static final int ROLLER_MOTOR_ID = 9;//placeholder value
+  }
 }
