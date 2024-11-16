@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.RollerCommands;
+
+import frc.robot.Constants.PivotConstants;
+
+import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.RollerSubsystem;
 import frc.robot.subsystems.TankSubsystem;
 
@@ -22,9 +25,9 @@ public class RobotContainer {
   private final TankSubsystem tankSubsystem;
 
   // Controls defined
+  private final PivotSubsystem pivotSubsystem;
   private final CommandPS4Controller mechController;
   private final RollerSubsystem rollerSubsystem;
-  private final RollerCommands rollerCommand;
   public double joyConLeft;
   public double joyConRight;
 
@@ -33,6 +36,7 @@ public class RobotContainer {
     // Subsystem created
     tankSubsystem = new TankSubsystem();
     rollerSubsystem = new RollerSubsystem();
+    pivotSubsystem = new PivotSubsystem();
     // Configure Bindings
     mechController = new CommandPS4Controller(0); // Use PS4 controller
     joyConLeft = 0;
@@ -64,7 +68,11 @@ public class RobotContainer {
     mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(0.5), rollerSubsystem));
     //if not pressed circle, run rollers
     mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
-    
+
+    mechController.triangle().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.CLOSED), rollerSubsystem));
+    mechController.square().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.FLOOR), rollerSubsystem));
+    mechController.cross().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.DROPBOX), rollerSubsystem));
+
   }
 
   // /**

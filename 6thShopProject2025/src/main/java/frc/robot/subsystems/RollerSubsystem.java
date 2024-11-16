@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants.RollerConstants;
-import com.ctre.phoenix6.signals.MotorTypeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
