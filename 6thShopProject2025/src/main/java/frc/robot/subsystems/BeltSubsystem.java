@@ -45,6 +45,7 @@ public class BeltSubsystem extends SubsystemBase {
    */
   public void breakRoller(boolean motorBreak) {
     if (motorBreak) {
+      mainBeltMotor.set(0);
       mainBeltMotor.setNeutralMode(NeutralMode.Brake);
     } else if (!motorBreak) {
       mainBeltMotor.setNeutralMode(NeutralMode.Coast);
