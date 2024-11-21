@@ -50,8 +50,8 @@ public class RobotContainer {
   private void configureBindings() {
     tankSubsystem.setDefaultCommand(new RunCommand(() -> {
       this.joyConLeft = mechController.getLeftY(); // Left Y-axis for PS5 controller
-      this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
-      tankSubsystem.setMotors(joyConLeft, joyConRight);
+      this.joyConRight = mechController.getRightX(); // Right Y-axis for PS5 controller
+      tankSubsystem.altDrive(joyConLeft, joyConRight);
     }, tankSubsystem));
   }
 

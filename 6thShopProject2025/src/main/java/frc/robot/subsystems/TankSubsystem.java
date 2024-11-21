@@ -39,8 +39,8 @@ public class TankSubsystem extends SubsystemBase {
     leftBACK.follow(leftFRONT); // mimic front to back motor
 
     // set to Neutral so it is ready to move
-    leftFRONT.setNeutralMode(NeutralMode.Coast);
-    leftBACK.setNeutralMode(NeutralMode.Coast);
+    leftFRONT.setNeutralMode(NeutralMode.Brake);
+    leftBACK.setNeutralMode(NeutralMode.Brake);
 
     // right motor pre-settings
 
@@ -67,12 +67,27 @@ public class TankSubsystem extends SubsystemBase {
   public void setMotors(double leftSpeed, double rightSpeed) {
 
     // left Motor speed set
-    leftFRONT.set(-1 * leftSpeed);
+    leftFRONT.set(-leftSpeed);
 
     // right Motor speed set
-    System.out.println(rightSpeed);
+    // System.out.println(rightSpeed);
     rightFRONT.set(rightSpeed);
 
+  }
+
+  public void altDrive(double leftAxis, double rightAxis) {
+    // System.out.println(rightAxis);
+    if (leftAxis == 0. && rightAxis != 0.) {
+      setMotors(rightAxis, -rightAxis);
+    }
+
+    else if (leftAxis != 0. && rightAxis == 0.) {
+      setMotors(leftAxis, leftAxis);
+    }
+
+    else {
+      setMotors((leftAxis - rightAxis) / 2.0, (leftAxis + rightAxis) / 2.0);
+    }
   }
 
   /**
