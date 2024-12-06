@@ -18,14 +18,14 @@ public final class Constants {
   }
 
   public static class  RollerConstants {
-    public static final int ROLLER_MOTOR_ID = 9;//placeholder value
+    public static final int ROLLER_MOTOR_ID = 13;//placeholder value
   }
 
   public static class  PivotConstants {
     public static final int PIVOT_MOTOR_ID = 8;//placeholder value
-    public static final double PIVOT_P = 8;//placeholder value
-    public static final double PIVOT_I = 8;//placeholder value
-    public static final double PIVOT_D = 8;//placeholder value
+    public static final double PIVOT_P = 0;//placeholder value
+    public static final double PIVOT_I = 0;//placeholder value
+    public static final double PIVOT_D = 0;//placeholder value
 
     public static final double CLOSED = 0;//placeholder value
     public static final double FLOOR = 1;//placeholder value
