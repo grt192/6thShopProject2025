@@ -12,6 +12,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.SparkPIDController.ArbFFUnits;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -22,6 +26,10 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PivotSubsystem extends SubsystemBase {
+  private NetworkTableInstance networkTablesInstance;
+  private NetworkTable networkTable;
+  private NetworkTableEntry networkTableEntry;
+
   static double speed;
   static double angle;
   private final CANSparkMax pivotMotor;
@@ -38,7 +46,10 @@ public class PivotSubsystem extends SubsystemBase {
     pidController.setD(PivotConstants.PIVOT_D);  // Derivative gain
     
     encoder = pivotMotor.getEncoder();
-
+    networkTablesInstance = NetworkTableInstance.getDefault();
+    networkTable = networkTablesInstance.getTable("networkTable");
+    networkTableEntry = networkTable.getEntry("networkTableEntry");
+    networkTableEntry.setDouble(1.1111); 
   }
 
   /**
@@ -69,6 +80,7 @@ public double getMotorPosition() {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    networkTableEntry.setDouble(angle*2*3.1415926);
   }
 
 }

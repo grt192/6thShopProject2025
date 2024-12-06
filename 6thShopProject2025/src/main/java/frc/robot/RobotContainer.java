@@ -17,15 +17,13 @@ import frc.robot.Constants.PivotConstants;
 
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.RollerSubsystem;
-import frc.robot.subsystems.TankSubsystem;
 
 public class RobotContainer {
 
   // Subsystems defined
-  private final TankSubsystem tankSubsystem;
 
   // Controls defined
-  private final PivotSubsystem pivotSubsystem;
+  //private final PivotSubsystem pivotSubsystem;
   private final CommandPS4Controller mechController;
   private final RollerSubsystem rollerSubsystem;
   public double joyConLeft;
@@ -34,9 +32,8 @@ public class RobotContainer {
   public RobotContainer() {
 
     // Subsystem created
-    tankSubsystem = new TankSubsystem();
     rollerSubsystem = new RollerSubsystem();
-    pivotSubsystem = new PivotSubsystem();
+    //pivotSubsystem = new PivotSubsystem();
     // Configure Bindings
     mechController = new CommandPS4Controller(0); // Use PS4 controller
     joyConLeft = 0;
@@ -57,22 +54,13 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    tankSubsystem.setDefaultCommand(new RunCommand(() -> {
-      this.joyConLeft = mechController.getLeftY(); // Left Y-axis for PS5 controller
-      this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
-
-      tankSubsystem.setMotors(joyConLeft, joyConRight);
-    }, tankSubsystem));
-    
+    rollerSubsystem.setSpeed(0.02);    
     //if pressed circle, run rollers
-    mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(0.5), rollerSubsystem));
+    mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(0.2), rollerSubsystem));
     //if not pressed circle, run rollers
-    mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
+    //mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
 
-    mechController.triangle().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.CLOSED), rollerSubsystem));
-    mechController.square().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.FLOOR), rollerSubsystem));
-    mechController.cross().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.DROPBOX), rollerSubsystem));
-
+    //rollerSubsystem.setSpeed(0.5);
   }
 
   // /**
