@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants.TankConstants;
+
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -33,8 +36,8 @@ public class TankSubsystem extends SubsystemBase {
     // left motor pre-settings
 
     // setting Motor ID's
-    leftFRONT = new WPI_TalonSRX(3);
-    leftBACK = new WPI_TalonSRX(2);
+    leftFRONT = new WPI_TalonSRX(TankConstants.leftFRONT_ID);
+    leftBACK = new WPI_TalonSRX(TankConstants.leftBACK_ID);
 
     leftBACK.follow(leftFRONT); // mimic front to back motor
 
@@ -45,8 +48,8 @@ public class TankSubsystem extends SubsystemBase {
     // right motor pre-settings
 
     // setting Motor ID's
-    rightFRONT = new WPI_TalonSRX(14);
-    rightBACK = new WPI_TalonSRX(15);
+    rightFRONT = new WPI_TalonSRX(TankConstants.rightFRONT_ID);
+    rightBACK = new WPI_TalonSRX(TankConstants.rightBACK_ID);
 
     rightBACK.follow(rightFRONT); // mimic front to back motor
 
@@ -70,7 +73,7 @@ public class TankSubsystem extends SubsystemBase {
     leftFRONT.set(-1 * leftSpeed);
 
     // right Motor speed set
-    System.out.println(rightSpeed);
+    // System.out.println(rightSpeed);
     rightFRONT.set(rightSpeed);
 
   }

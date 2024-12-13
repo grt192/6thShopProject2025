@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants.PivotConstants;
-import frc.robot.Constants.RollerConstants;
 
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkMax;
@@ -31,7 +30,7 @@ public class PivotSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public PivotSubsystem() {
     angle = 0;
-    pivotMotor = new CANSparkMax(RollerConstants.ROLLER_MOTOR_ID, MotorType.kBrushless);//neo
+    pivotMotor = new CANSparkMax(PivotConstants.PIVOT_MOTOR_ID, MotorType.kBrushless);//neo
     pidController = pivotMotor.getPIDController();
     pidController.setP(PivotConstants.PIVOT_P);  // Proportional gain
     pidController.setI(PivotConstants.PIVOT_I);  // Integral gain

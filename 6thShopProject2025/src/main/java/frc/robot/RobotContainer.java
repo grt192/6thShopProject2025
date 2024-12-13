@@ -65,16 +65,17 @@ public class RobotContainer {
     }, tankSubsystem));
     
     //if pressed circle, run rollers
-    mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(0.5), rollerSubsystem));
+    //mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(mechController.getLeftY()), rollerSubsystem));
+    mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(-1), rollerSubsystem));
+
     //if not pressed circle, run rollers
     mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
-
+    
     mechController.triangle().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.CLOSED), rollerSubsystem));
     mechController.square().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.FLOOR), rollerSubsystem));
     mechController.cross().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.DROPBOX), rollerSubsystem));
 
   }
-
   // /**
   // * Use this to pass the autonomous command to the main {@link Robot} class.
   // *
