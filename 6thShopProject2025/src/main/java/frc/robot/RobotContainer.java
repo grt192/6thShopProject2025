@@ -64,20 +64,10 @@ public class RobotContainer {
       this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
       tankSubsystem.setMotors(joyConLeft, joyConRight);
     }, tankSubsystem));
-
-    mechController.square().onTrue(new InstantCommand(() -> {
-      if (beltSwitch.get()) {
-        beltSubsystem.breakRoller(true);
-        ;
-      } else {
-        beltSubsystem.setBelt(0.2);
-      }
-    }));
-    mechController.circle().onTrue(new InstantCommand(() -> {
-      beltSubsystem.breakRoller(false);
-      beltSubsystem.setBelt(0.2);
-
-    }));
+    
+    beltSubsystem.setDefaultCommand(new InstantCommand(() -> {
+      beltSubsystem.setBelt(mechController.getL2Axis()-mechController.getR2Axis());
+    }, beltSubsystem ));
 
   }
 
