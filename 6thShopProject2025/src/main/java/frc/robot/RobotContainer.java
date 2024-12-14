@@ -66,10 +66,10 @@ public class RobotContainer {
     
     //if pressed circle, run rollers
     //mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(mechController.getLeftY()), rollerSubsystem));
+    rollerSubsystem.setDefaultCommand(new RunCommand(() -> rollerSubsystem.setSpeed(mechController.getL2Axis()-mechController.getR2Axis())));
     mechController.circle().onTrue(Commands.runOnce(() -> rollerSubsystem.setSpeed(-1), rollerSubsystem));
 
     //if not pressed circle, run rollers
-    mechController.circle().onFalse(Commands.runOnce(() -> rollerSubsystem.setSpeed(0), rollerSubsystem));
     
     mechController.triangle().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.CLOSED), rollerSubsystem));
     mechController.square().onTrue(Commands.runOnce(() -> pivotSubsystem.setTargetState(PivotConstants.FLOOR), rollerSubsystem));
