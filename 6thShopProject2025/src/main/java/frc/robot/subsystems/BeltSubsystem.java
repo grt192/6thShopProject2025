@@ -22,7 +22,7 @@ public class BeltSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public BeltSubsystem() {
 
-    mainBeltMotor = new WPI_TalonSRX(3);
+    mainBeltMotor = new WPI_TalonSRX(5);
     mainBeltMotor.setNeutralMode(NeutralMode.Coast); // turning braking to Coast
 
   }

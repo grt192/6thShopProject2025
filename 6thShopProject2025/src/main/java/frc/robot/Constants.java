@@ -17,15 +17,15 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   public static class TankConstants{
-    public static final int leftFRONT_ID = 1;
-    public static final int leftBACK_ID = 2;
+    public static final int leftFRONT_ID = 1;//correct
+    public static final int leftBACK_ID = 2;//correct
   
-    public static final int rightFRONT_ID = 3;
-    public static final int rightBACK_ID = 4;
+    public static final int rightFRONT_ID = 4;//correct
+    public static final int rightBACK_ID = 3;//correct
 
   }
   public static class  RollerConstants {
-    public static final int ROLLER_MOTOR_ID = 14;//placeholder value
+    public static final int ROLLER_MOTOR_ID = 12;//placeholder value
   }
 
   public static class  PivotConstants {

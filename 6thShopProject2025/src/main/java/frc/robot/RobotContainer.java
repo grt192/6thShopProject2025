@@ -15,9 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 
-import frc.robot.Constants.PivotConstants;
-
-import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.RollerSubsystem;
 import frc.robot.subsystems.TankSubsystem;
 import frc.robot.subsystems.BeltSubsystem;
@@ -29,14 +26,12 @@ public class RobotContainer {
   private final BeltSubsystem beltSubsystem;
 
   // Controls defined
-  private final PivotSubsystem pivotSubsystem;
   private final CommandPS4Controller mechController;
   private final RollerSubsystem rollerSubsystem;
   public double joyConLeft;
   public double joyConRight;
 
   // sensors defined
-  private final DigitalInput beltSwitch;
 
   public RobotContainer() {
 
@@ -67,12 +62,12 @@ public class RobotContainer {
   private void configureBindings() {
     tankSubsystem.setDefaultCommand(new RunCommand(() -> {
       this.joyConLeft = mechController.getLeftY(); // Left Y-axis for PS5 controller
-      this.joyConRight = mechController.getRightY(); // Right Y-axis for PS5 controller
+      this.joyConRight = mechController.getRightX(); // Right Y-axis for PS5 controller
 
-      tankSubsystem.setMotors(joyConLeft, joyConRight);
+      tankSubsystem.altDrive(joyConLeft, joyConRight);
     }, tankSubsystem));
     rollerSubsystem.setDefaultCommand(new RunCommand(() -> {rollerSubsystem.setSpeed(mechController.getL2Axis()-mechController.getR2Axis());},rollerSubsystem));
-    beltSubsystem.setDefaultCommand(new InstantCommand(() ->  {beltSubsystem.setBelt(mechController.getL2Axis()-mechController.getR2Axis());}, beltSubsystem));
+    beltSubsystem.setDefaultCommand(new InstantCommand(() ->  {beltSubsystem.setBelt(mechController.getR2Axis()-mechController.getL2Axis());}, beltSubsystem));
   }
 
   // /**

@@ -59,6 +59,22 @@ public class TankSubsystem extends SubsystemBase {
 
   }
 
+  
+  public void altDrive(double leftAxis, double rightAxis) {
+    // System.out.println(rightAxis);
+    if (leftAxis == 0. && rightAxis != 0.) {
+      setMotors(-rightAxis, rightAxis);
+    }
+
+    else if (leftAxis != 0. && rightAxis == 0.) {
+      setMotors(leftAxis, leftAxis);
+    }
+
+    else {
+      setMotors((leftAxis - rightAxis) / 2.0, (leftAxis + rightAxis) / 2.0);
+    }
+  }
+
   /**
    * Sets the leftMotors and rightMotors speed and direction.
    *
